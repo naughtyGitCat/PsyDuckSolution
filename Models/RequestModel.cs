@@ -32,7 +32,7 @@ namespace DBACommonPackage.Models
     }
     public interface IPagerOrderQueryParameter : IOrderQueryParameter, IPagerQueryParameter { }
 
-    public class BaseQueryParameter : IPagerOrderQueryParameter
+    public class PagerOrderQueryParameter : IPagerOrderQueryParameter
     {
         // PAGER
         public int PageNumber { get; set; } = 1;
