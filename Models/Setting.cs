@@ -17,6 +17,7 @@ namespace DBACommonPackage.Models
     }
     public class HTTPSimpleAPI : HostPort
     {
+        public string Protocol { get; set; }
         public string APIPath { get; set; }
     }
 }
