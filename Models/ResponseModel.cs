@@ -21,6 +21,6 @@ namespace DBACommonPackage.Models
     public class RowsWithTotalCount<T>
     {
         public IEnumerable<T> Rows { get; set; }
-        public int Count { get; set; }
+        public long Count { get; set; }
     }
 }
