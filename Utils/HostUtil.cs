@@ -10,6 +10,7 @@
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
+using DBACommonPackage.Models;
 
 namespace DBACommonPackage.Utils
 {
@@ -33,6 +34,60 @@ namespace DBACommonPackage.Utils
                 var bomList = Dns.GetHostAddresses(Dns.GetHostName());
                 return bomList.FirstOrDefault(ha => ha.AddressFamily == AddressFamily.InterNetwork).ToString();
             }
+        }
+
+        public static class HostInfoFactory
+        {
+            /// <summary>
+            /// like darwin/linux/windows
+            /// </summary>
+            /// <returns></returns>
+            public static string ReadOSType()
+            {
+                var rawString = System.Runtime.InteropServices.RuntimeInformation.OSDescription;
+                return rawString.Split(" ")[0].ToLower();
+            }
+            /// <summary>
+            /// use dns,in danger of cache
+            /// </summary>
+            /// <returns></returns>
+            public static string GetLocalIPByDNS()
+            {
+                var bomList = Dns.GetHostAddresses(Dns.GetHostName());
+                return bomList.FirstOrDefault(ha => ha.AddressFamily == AddressFamily.InterNetwork).ToString();
+            }
+            /// <summary>
+            /// use socket
+            /// </summary>
+            /// <returns></returns>
+            public static string GetLocalIPBySocket()
+            {
+                string ip = "127.0.0.1";
+                Socket sock = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+                try
+                {
+                    IPEndPoint localEndPoint = new IPEndPoint(IPAddress.Any, 0);
+                    sock.Bind(localEndPoint);
+                    localEndPoint = (IPEndPoint)sock.LocalEndPoint;
+                    ip = localEndPoint.Address.ToString();
+                }
+                finally
+                {
+                    sock.Close();
+                }
+                return ip;
+            }
+
+            public static HostInfo FetchHostInfo(bool useSocket=false)
+            {
+                return new HostInfo
+                {
+                    OSType = ReadOSType(),
+                    HostIP = useSocket ? GetLocalIPBySocket() : GetLocalIPByDNS(),
+                    HostName = Dns.GetHostName()
+                };
+            }
+
         }
     }
 }
