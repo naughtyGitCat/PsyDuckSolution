@@ -16,6 +16,11 @@ namespace DBACommonPackage.Extensions
 {
     public static class IEnumerableExtensions
     {
+        // code from
+        // https://medium.com/@alex.puiu/parallel-foreach-async-in-c-36756f8ebe62
+        // https://scatteredcode.net/parallel-foreach-async-in-c/
+        // reference(difference between parallel.foreach and task.wait all)
+        // https://stackoverflow.com/questions/19102966/parallel-foreach-vs-task-run-and-task-whenall
         public static async Task AsyncParallelForEach<T>(this IAsyncEnumerable<T> source, Func<T, Task> body, int maxDegreeOfParallelism = DataflowBlockOptions.Unbounded, TaskScheduler scheduler = null)
         {
             var options = new ExecutionDataflowBlockOptions
