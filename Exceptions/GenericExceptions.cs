@@ -16,4 +16,18 @@ namespace DBACommonPackage.Exceptions
         public GenericException(string errMsg) : base(errMsg) { }
         public GenericException(string message, Exception innerException) : base(message, innerException) { }
     }
+
+    public class NotFindException : GenericException
+    {
+        public NotFindException() { }
+        public NotFindException(string errMsg) : base(errMsg) { }
+        public NotFindException(string message, Exception innerException) : base(message, innerException) { }
+    }
+
+    public class DBRecordNotFindException : NotFindException
+    {
+        public DBRecordNotFindException() { }
+        public DBRecordNotFindException(string errMsg) : base(errMsg) { }
+        public DBRecordNotFindException(string message, Exception innerException) : base(message, innerException) { }
+    }
 }
