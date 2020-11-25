@@ -19,4 +19,11 @@ namespace DBACommonPackage.Models
         /// </summary>
         public string OSType { get; set; }
     }
+
+    public class ApplicationInfo
+    {
+        public HostInfo HostInfo { get; set; }
+        public ProjectInfo ProjectInfo { get; set; }
+        public int ApplicationPort { get; set; }
+    }
 }
