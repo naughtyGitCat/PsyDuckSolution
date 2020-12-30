@@ -20,6 +20,7 @@ namespace DBACommonPackage.Models
     {
         public string Name { get; set; }
         public string Kanji { get; set; }
+        public string[] Tags { get; set; }
         public string Remark { get; set; }
         public string Version { get; set; }
         public string Developer { get; set; }
