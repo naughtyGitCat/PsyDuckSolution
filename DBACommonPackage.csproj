@@ -15,6 +15,7 @@
             <PackageProjectUrl>https://github.com/naughtyGitCat/PsyDuckCommon</PackageProjectUrl>
     <Title>PsyDuckCommon</Title>
     <PackageReleaseNotes>project info add tags attr</PackageReleaseNotes>
+    <Configurations>Release;Debug</Configurations>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
